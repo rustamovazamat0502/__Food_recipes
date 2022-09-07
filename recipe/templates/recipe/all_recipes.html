@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load recipe_tags %}
+{% load static %}
+
+{% block main %}
+<div class="d-flex justify-content-between">
+    <div class="col-3">
+        {% get_all_categories as categories %}
+        {% include 'recipe/components/_sidebar.html' %}
+    </div>
+
+    <div class="col-9">
+        {% for recipe in recipes %}
+        {% include 'recipe/components/_recipe_card.html' %}
+        {% endfor %}
+
+        <div class="text-center">
+            {% include 'components/_pagination.html' %}
+        </div>
+    </div>
+</div>
+
+{% block script %}
+<script src="{% static 'recipe/js/heart.js' %}"></script>
+{% endblock script %}
+
+{% endblock main %}

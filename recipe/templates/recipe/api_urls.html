@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div>
+    <div>
+        <h1><b>Api Urls</b></h1>
+        <hr>
+        <a class="btn btn-primary mb-2 d-grid col-5">api/category/</a><br>
+        <a class="btn btn-info mb-2 d-grid col-5">api/category_detail/int:pk/</a><br>
+        <a class="btn btn-success mb-2 d-grid col-5">api/category_create/</a><br>
+        <a class="btn btn-warning mb-2 d-grid col-5">api/category_update/int:pk/</a><br>
+        <a class="btn btn-danger mb-2 d-grid col-5">api/category_delete/int:pk/</a><br>
+        <hr>
+        <hr>
+        <a class="btn btn-primary mb-2 d-grid col-5">api/recipe/</a><br>
+        <a class="btn btn-info mb-2 d-grid col-5">api/recipe_detail/int:pk/</a><br>
+        <a class="btn btn-success mb-2 d-grid col-5">api/recipe_create/</a><br>
+        <a class="btn btn-warning mb-2 d-grid col-5">api/recipe_update/int:pk/</a><br>
+        <a class="btn btn-danger mb-2 d-grid col-5">api/recipe_delete/int:pk/</a><br>
+    </div>
+</div>
+
+{% endblock main %}

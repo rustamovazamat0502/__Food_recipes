@@ -1,0 +1,8 @@
+{% for category in categories %}
+<div class="list-group bg-dark" style="border-radius: 14px">
+    <a href="{{ category.get_absolute_url }}" style=""
+       class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white btn btn-primary">
+        {{ category.title }} <span class="total_recipes text-white">{{ category.recipe__count }}</span>
+    </a>
+</div>
+{% endfor %}

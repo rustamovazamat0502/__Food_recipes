@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load users_tags %}
+{% block main %}
+<table class="table table-hover table-dark" style="border-radius: 3px">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Group</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <th scope="row">{{ user.id }}</th>
+        {% if user.first_name and user.last_name %}
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        {% endif %}
+        <td>
+            <img class="rounded-circle" src="{{ user.profile.image.url }}" width="30">
+            {{ user.username }}
+        </td>
+        <td>{{ user.email }}</td>
+        {% if user|has_group:'admin' %}
+        <td style="color: green">{{ user.groups.all.0 }}</td>
+        {% else %}
+        <td style="color: red">{{ user.groups.all.0 }}</td>
+        {% endif %}
+        <td>
+            {% if user.username == "admin" %}
+            <a class="btn btn-outline-info d-grid col-12" href="{% url 'update_user' user.id %}">Update</a>
+            {% else %}
+            <a class="btn btn-outline-danger d-grid col-12" href="{% url 'delete_user' user.id %}">Remove</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}

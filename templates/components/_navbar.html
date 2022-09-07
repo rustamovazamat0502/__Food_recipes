@@ -1,0 +1,64 @@
+{% load static %}
+{% load recipe_tags %}
+<div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+            <a class="nav-item" href="{% url 'home' %}">
+                <img class="rounded-circle" src="{% static 'recipe/img/logo1.png' %}" width="40">
+            </a>
+            <a class="navbar-brand ml-3" href="{% url 'home' %}"><b>Recipes</b></a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}"><b>Home</b><span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'all' %}"><b>Categories</b></a>
+            </li>
+            {% if user.is_authenticated %}
+
+            {% if user|has_group:'admin' %}
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <b>Actions</b>
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item bg-dark btn btn-primary text-white" href="{% url 'add_category' %}">
+                        <b>Add Category</b></a>
+                    <a class="dropdown-item bg-dark btn btn-primary text-white" href="{% url 'add_recipe' %}">
+                        <b>Add Recipe</b></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item bg-dark btn btn-primary text-white" href="{% url 'users' %}">
+                        <b>Users Table</b></a>
+                    <a class="dropdown-item bg-dark btn btn-primary text-white" href="{% url 'api_urls' %}">
+                        <b>Api Urls</b></a>
+                </div>
+            </div>
+            {% endif %}
+        </ul>
+        <div class="navbar-nav">
+            <div class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}"><b>Profile</b></a>
+            </div>
+            <div class="nav-item mr-3">
+                <a class="nav-link" href="{% url 'logout' %}"><b>Logout</b></a>
+            </div>
+            <form method="GET" action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0">
+                <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><b>Search</b></button>
+            </form>
+            {% else %}
+            <div class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}"><b>Registration</b></a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}"><b>Login</b></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

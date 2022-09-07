@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block main %}
+<div class="content-section bg-dark text-white text-center"
+     style="border: 1px solid #dddddd; background-color: #ffffff">
+    <form class="form-group" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Delete Recipes</legend>
+            <h3>Are you sure you want to delete "{{ recipe }}" ?</h3>
+        </fieldset>
+        <hr>
+        <div class="form-group">
+            <input class="btn btn-outline-danger btn-lg btn-block" type="submit" value="Confirm">
+            <a class="btn btn-outline-secondary btn-lg btn-block" href="{% url 'recipe_details' recipe.id %}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock main %}

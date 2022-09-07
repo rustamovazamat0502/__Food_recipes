@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="card text-center text-white bg-dark mb-3">
+    <div class="card-header">
+        {{ recipe.category.title }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ recipe.food_name }}</h5>
+        <hr>
+        <div class="card-photo">
+            {% if recipe.image %}
+            <img src="{{ recipe.image.url }}" width="300px">
+            {% else %}
+            <img src="{% static 'recipe/img/default.png' %}"
+                 width="300px">
+            {% endif %}
+            <hr>
+        </div>
+        <p class="card-text">{{ recipe.description }}.</p>
+        <a href="{{ recipe.get_absolute_url }}" class="btn btn-primary">Get Full Recipe...</a>
+        <span id=heart><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+    </div>
+    <div class="card-footer text-muted">
+        Updated at {{ recipe.created_at }}
+    </div>
+    <div class="card-footer text-muted">
+        Created at {{ recipe.updated_at }}
+    </div>
+</div>

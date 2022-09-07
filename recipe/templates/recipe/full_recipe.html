@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load recipe_tags %}
+
+{% block main %}
+<div class="card text-white bg-dark mb-3">
+    <div class="card-photo">
+        {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" width="300" class="card-img-top" alt="...">
+        {% else %}
+        <img src="{% static 'recipe/img/default.png' %}" width="300" class="card-img-top">
+        {% endif %}
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">{{ recipe.food_name }}</h5>
+        <p class="card-text">{{ recipe.description }}.</p>
+        {% if recipe.video %}
+        <video width="1060" height="240" controls>
+            <source src="{{ recipe.video.url }}" type="video/mp4">
+        </video>
+        {% else %}
+        <p style="color:red"><b>VIDEO UNAVAILABLE !!!</b></p>
+        {% endif %}
+        <!--        <div class="card-body d-flex justify-content-between">-->
+        <!--            <div class="col-6">-->
+        <!--                {% if recipe.video %}-->
+        <!--                <video width="530" height="240" controls>-->
+        <!--                    <source src="{{ recipe.video.url }}" type="video/mp4">-->
+        <!--                </video>-->
+        <!--                {% else %}-->
+        <!--                <p style="color:red"><b>VIDEO UNAVAILABLE !!!</b></p>-->
+        <!--                {% endif %}-->
+        <!--            </div>-->
+        <!--            <div class="col-5">-->
+        <!--                <p class="card-text">{{ recipe.description }}.</p>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <p class="card-text ml-100"><b>Ingredients: </b>{{ recipe.ingredients }}</p>
+        <p class="card-text"><b>Method: </b>{{ recipe.method }}.</p>
+        <p class="card-text text-muted">Updated At: {{ recipe.updated_at }}</p>
+        <p class="card-text text-muted">Created At: {{ recipe.created_at }}</p>
+        <hr>
+
+        <a class="btn btn-success btn-lg btn-block  mb-3" href="{% url 'all' %}">Back To Categories</a>
+        {% if user|has_group:'admin' %}
+        <a class="btn btn-outline-primary btn-lg btn-block  mb-3"
+           href="{% url 'update_recipe' recipe.id %}">Update</a>
+        <a class="btn btn-outline-danger btn-lg btn-block  mb-3"
+           href="{% url 'delete_recipe' recipe.id %}">Delete</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock main %}
+
+
